@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --primary: #1b5e20;
+  --primary-text: #ffffff;
+  --muted: #f1f5f1;
+  --border: #5f6b5f;
+  --space: 1rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+a { color: var(--primary); }
+
+:focus-visible {
+  outline: 3px solid #ff8f00;
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--primary);
+  color: var(--primary-text);
+  padding: 0.5rem 1rem;
+}
+.skip-link:focus { left: 0; }
+
+header, footer {
+  background: var(--primary);
+  color: var(--primary-text);
+  padding: var(--space);
+}
+header nav { display: flex; gap: var(--space); flex-wrap: wrap; align-items: center; }
+header a, footer a { color: var(--primary-text); }
+.brand { font-weight: 700; font-size: 1.2rem; margin-right: auto; text-decoration: none; }
+
+main { max-width: 800px; margin: 0 auto; padding: var(--space); }
+
+.button {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--primary-text);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  border: 0;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.button:hover { filter: brightness(1.15); }
+
+.cards { list-style: none; padding: 0; display: grid; gap: var(--space); }
+.card { background: var(--muted); border: 1px solid var(--border); border-radius: 8px; padding: var(--space); }
+.card h2 { margin-top: 0; }
+
+form { display: grid; gap: 0.5rem; max-width: 480px; }
+label { font-weight: 600; margin-top: 0.5rem; }
+input, textarea {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--text);
+}
+
+@media (min-width: 768px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  main { padding: 2rem; }
 }
